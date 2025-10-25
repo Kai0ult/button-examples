@@ -9,6 +9,8 @@ import {
   TouchableNativeFeedback
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function App() {
 
@@ -34,12 +36,22 @@ export default function App() {
       </TouchableHighlight>
 
       <TouchableOpacity
-        style={styles.buttonOpacity}
         activeOpacity={0.7}
-        onPress={() => handlePress('Você pressionou o botao Opacity')}
-        onLongPress={() => handleLongPress('Toque longo no botao Opacity')}
+        onPress={() => handlePress('Você pressionou o botao estilizado')}
+        onLongPress={() => handleLongPress('Toque longo no botao estilizado')}
+        style={styles.shadowContainer}
       >
-        <Text style={styles.text}>TouchableOpacity</Text>
+        <LinearGradient
+          colors={['#4facfe', '#00f2fe']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.buttonOpacity}
+        >
+          <View style={styles.iconTextContainer}>
+            <Ionicons name="flash-outline" size={22} color="#fff" style={styles.icon} />
+            <Text style={styles.text}>TouchableOpacity</Text>
+          </View>
+        </LinearGradient>
       </TouchableOpacity>
 
       <View style={styles.wrapperNative}>
@@ -61,7 +73,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#121212',
+    backgroundColor: '#ffffffff',
     alignItems: 'center',
     justifyContent: 'center',
     gap: 20,
@@ -73,15 +85,31 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderRadius: 8,
   },
+
+  shadowContainer: {
+    borderRadius: 12,
+    elevation: 8,
+    shadowColor: '#00aaff',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+  },
   buttonOpacity: {
-    backgroundColor: '#28a745',
+    borderRadius: 12,
     paddingVertical: 15,
     paddingHorizontal: 30,
-    borderRadius: 8,
+  },
+  iconTextContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  icon: {
+    marginRight: 8,
   },
   wrapperNative: {
     borderRadius: 8,
-    overflow: 'hidden', 
+    overflow: 'hidden',
   },
   buttonNative: {
     backgroundColor: '#ff5722',
